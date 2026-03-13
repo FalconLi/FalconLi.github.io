@@ -1,7 +1,7 @@
 h4 {
   letter-spacing: .1rem; }
 .container {
-  max-width: 800px; }
+  max-width: 960px; }
 .header {
   margin-top: 60px;
   margin-bottom: 60px; 
@@ -51,6 +51,121 @@ h4 {
   color: rgba(0, 0, 0, 0.60); }
 .image {
   text-align: center; }
+
+/*  ================ News styling  ================ */
+#news .news-scroll-window {
+  max-height: 16rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+}
+#news .news-table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: none;
+}
+#news .news-table,
+#news .news-table tbody,
+#news .news-table tr,
+#news .news-table td {
+  border: none !important;
+}
+#news .news-table tr {
+  display: table-row !important;
+}
+#news .news-table td {
+  display: table-cell !important;
+  vertical-align: top !important;
+  padding: 0.35rem 0 !important;
+  border-bottom: none !important;
+}
+#news .news-date {
+  width: 8.5rem !important;
+  white-space: nowrap !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  padding-right: 0 !important;
+  font-weight: 600;
+}
+#news .news-content {
+  width: auto !important;
+  padding-left: 0 !important;
+}
+#news .news-gap {
+  width: 1.2rem !important;
+  min-width: 1.2rem !important;
+  padding: 0 !important;
+}
+
+/*  ================ Awards styling  ================ */
+#awards .awards-scroll-window {
+  display: block;
+  max-height: 17rem; /* roughly 5 awards */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding-right: 8px;
+}
+#awards .award-item {
+  margin: 0 0 10px 0;
+}
+#awards .award-item:last-child {
+  margin-bottom: 0;
+}
+
+/*  ================ Teaching styling  ================ */
+#teaching .teaching-scroll-window {
+  display: block;
+  max-height: 17rem; /* roughly 5 awards */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-gutter: stable;
+  padding-right: 8px;
+}
+#teaching .teaching-item {
+  margin: 0 0 10px 0;
+}
+#teaching .teaching-item:last-child {
+  margin-bottom: 0;
+}
+
+/*  ================ Resume timeline overrides  ================ */
+#resume .timeline {
+  width: 100%;
+  max-width: 100%;
+}
+#resume .direction-l,
+#resume .direction-r {
+  width: calc(50% - 30px);
+}
+#resume .flag-wrapper {
+  white-space: nowrap;
+}
+#resume .flag {
+  display: inline-block;
+}
+#resume .direction-l .time-wrapper,
+#resume .direction-r .time-wrapper {
+  float: none;
+  display: inline-block;
+  margin-left: 8px;
+}
+@media screen and (max-width: 660px) {
+  #resume .direction-l,
+  #resume .direction-r {
+    width: 100%;
+  }
+  #resume .flag-wrapper {
+    white-space: normal;
+  }
+  #resume .direction-l .time-wrapper,
+  #resume .direction-r .time-wrapper {
+    display: block;
+    margin-left: 0;
+  }
+}
 
 /*  ================ Project styling  ================ */
 .project-container {

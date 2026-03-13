@@ -5,14 +5,19 @@
   <!-- Basic Page Needs
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <meta charset="utf-8">
-  <title>{{ site.data.main_info.name }} | {{ page.title }}</title>
-  <meta name="description" content="Martin Saveski">
-  <meta name="author" content="Martin Saveski">
-  <meta property="og:title" content="Martin Saveski" />
+  {% assign site_name = site.data.main_info.name | default: "Personal Website" | strip %}
+  {% assign meta_author = site.data.main_info.author | default: site_name | strip %}
+  {% assign meta_description = site.data.main_info.meta_description | default: site.data.main_info.title | default: site_name | strip %}
+  {% assign og_site_name = site.data.main_info.og_site_name | default: site_name | strip %}
+  {% assign canonical_path = page.url | default: "/" %}
+  <title>{{ site_name }} | {{ page.title }}</title>
+  <meta name="description" content="{{ meta_description }}">
+  <meta name="author" content="{{ meta_author }}">
+  <meta property="og:title" content="{{ site_name }} | {{ page.title }}" />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="http://www.martinsaveski.com" />
-  <meta property="og:site_name" content="Martin Saveski" />
-  <link rel="canonical" href="http://www.martinsaveski.com" />
+  <meta property="og:url" content="{{ canonical_path | absolute_url }}" />
+  <meta property="og:site_name" content="{{ og_site_name }}" />
+  <link rel="canonical" href="{{ canonical_path | absolute_url }}" />
 
   <!-- Mobile Specific Metas
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
@@ -66,6 +71,16 @@
   <!-- Primary Page Layout
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <div class="container">
+    {% assign bsky_url = site.data.main_info.bsky | default: "" | strip %}
+    {% assign twitter_url = site.data.main_info.twitter | default: "" | strip %}
+    {% assign linkedin_url = site.data.main_info.linkedin | default: "" | strip %}
+    {% assign github_url = site.data.main_info.github | default: "" | strip %}
+    {% assign scholar_url = site.data.main_info.google_scholar | default: "" | strip %}
+
+    {% assign email_single = site.data.main_info.email | default: "" | strip %}
+    {% assign email1 = site.data.main_info.email1 | default: "" | strip %}
+    {% assign email2 = site.data.main_info.email2 | default: "" | strip %}
+    {% assign department_line = site.data.main_info.department | default: site.data.main_info.deparment | default: "" | strip %}
 
     <section class="header">
       <div class="row">
@@ -75,28 +90,58 @@
         <div class="nine columns main-description">
             <h1>{{ site.data.main_info.name }}</h1>
             <p>{{ site.data.main_info.title }}</p>
-            <p>{{ site.data.main_info.email }}</p>
-            <p>
-              <span onclick="window.open('{{ site.data.main_info.bsky }}')" style="cursor: pointer">
-                <i class="fa-brands fa-bluesky" style="padding-top: 10px"></i>
-              </span>
+            {% if department_line != "" %}
+              <p>{{ department_line }}</p>
+            {% endif %}
+            {% if site.data.main_info.emails %}
+              {% for email_item in site.data.main_info.emails %}
+                <p>{{ email_item }}</p>
+              {% endfor %}
+            {% else %}
+              {% if email1 != "" %}
+                <p>{{ email1 }}</p>
+              {% endif %}
+              {% if email2 != "" %}
+                <p>{{ email2 }}</p>
+              {% endif %}
+              {% if email1 == "" and email2 == "" and email_single != "" %}
+                <p>{{ email_single }}</p>
+              {% endif %}
+            {% endif %}
 
-              <span onclick="window.open('{{ site.data.main_info.twitter }}')" style="cursor: pointer">
-                <i class="fa-brands fa-twitter fa-lg"></i>
-              </span>
+            {% if bsky_url != "" or twitter_url != "" or linkedin_url != "" or github_url != "" or scholar_url != "" %}
+              <p>
+                {% if bsky_url != "" %}
+                  <span onclick="window.open('{{ bsky_url }}')" style="cursor: pointer">
+                    <i class="fa-brands fa-bluesky" style="padding-top: 10px"></i>
+                  </span>
+                {% endif %}
 
-              <span onclick="window.open('{{ site.data.main_info.linkedin }}')" style="cursor: pointer">
-                <i class="fa-brands fa-linkedin fa-lg"></i>
-              </span>
+                {% if twitter_url != "" %}
+                  <span onclick="window.open('{{ twitter_url }}')" style="cursor: pointer">
+                    <i class="fa-brands fa-twitter fa-lg"></i>
+                  </span>
+                {% endif %}
 
-              <span onclick="window.open('{{ site.data.main_info.github }}')" style="cursor: pointer">
-                <i class="fa-brands fa-github fa-lg"></i>
-              </span>
+                {% if linkedin_url != "" %}
+                  <span onclick="window.open('{{ linkedin_url }}')" style="cursor: pointer">
+                    <i class="fa-brands fa-linkedin fa-lg"></i>
+                  </span>
+                {% endif %}
 
-              <span onclick="window.open('{{ site.data.main_info.google_scholar }}')" style="cursor: pointer">
-                <i class="ai ai-google-scholar ai-lg" aria-hidden="true"></i>
-              </span>
-            </p>
+                {% if github_url != "" %}
+                  <span onclick="window.open('{{ github_url }}')" style="cursor: pointer">
+                    <i class="fa-brands fa-github fa-lg"></i>
+                  </span>
+                {% endif %}
+
+                {% if scholar_url != "" %}
+                  <span onclick="window.open('{{ scholar_url }}')" style="cursor: pointer">
+                    <i class="ai ai-google-scholar ai-lg" aria-hidden="true"></i>
+                  </span>
+                {% endif %}
+              </p>
+            {% endif %}
         </div>
       </div>
     </section>
@@ -106,8 +151,10 @@
       <div class="container">
         <ul class="navbar-list">
           <li class="navbar-item"><a class="navbar-link" href={{ "/index.html#bio" | prepend: site.baseurl }}>Bio</a></li>
-          <li class="navbar-item"><a class="navbar-link" href={{ "/index.html#prospective-students" | prepend: site.baseurl }}>Prospective Students</a></li>
+          <li class="navbar-item"><a class="navbar-link" href={{ "/index.html#news" | prepend: site.baseurl }}>News</a></li>
           <li class="navbar-item"><a class="navbar-link" href={{ "/index.html#publications" | prepend: site.baseurl }}>Publications</a></li>
+          <li class="navbar-item"><a class="navbar-link" href={{ "/index.html#awards" | prepend: site.baseurl }}>Honours & Awards</a></li>
+          <li class="navbar-item"><a class="navbar-link" href={{ "/index.html#teaching" | prepend: site.baseurl }}>Teaching</a></li>
           <!--<li class="navbar-item"><a class="navbar-link" href={{ "/index.html#projects" | prepend: site.baseurl }}>Projects</a></li>-->
           <li class="navbar-item"><a class="navbar-link" href={{ "/index.html#resume" | prepend: site.baseurl }}>Vita</a></li>
         </ul>
@@ -122,28 +169,38 @@
           {{ site.data.main_info.name }}
         </div>
         <div class="four columns">
-          {{ site.data.main_info.email }}
+          <div>Last updated in {{ site.time | date: "%b %Y" }}</div>
         </div>
         <div class="four columns">
-          <span onclick="window.open('{{ site.data.main_info.bsky }}')" style="cursor: pointer">
-            <i class="fa-brands fa-bluesky fa-sm" style="padding-top: 10px"></i>
-          </span>
+          {% if bsky_url != "" %}
+            <span onclick="window.open('{{ bsky_url }}')" style="cursor: pointer">
+              <i class="fa-brands fa-bluesky fa-sm" style="padding-top: 10px"></i>
+            </span>
+          {% endif %}
 
-          <span onclick="window.open('{{ site.data.main_info.twitter }}')" style="cursor: pointer">
-            <i class="fa-brands fa-twitter"></i>
-          </span>
+          {% if twitter_url != "" %}
+            <span onclick="window.open('{{ twitter_url }}')" style="cursor: pointer">
+              <i class="fa-brands fa-twitter"></i>
+            </span>
+          {% endif %}
 
-          <span onclick="window.open('{{ site.data.main_info.linkedin }}')" style="cursor: pointer">
-            <i class="fa-brands fa-linkedin"></i>
-          </span>
+          {% if linkedin_url != "" %}
+            <span onclick="window.open('{{ linkedin_url }}')" style="cursor: pointer">
+              <i class="fa-brands fa-linkedin"></i>
+            </span>
+          {% endif %}
 
-          <span onclick="window.open('{{ site.data.main_info.github }}')" style="cursor: pointer">
-            <i class="fa-brands fa-github"></i>
-          </span>
+          {% if github_url != "" %}
+            <span onclick="window.open('{{ github_url }}')" style="cursor: pointer">
+              <i class="fa-brands fa-github"></i>
+            </span>
+          {% endif %}
 
-          <span onclick="window.open('{{ site.data.main_info.google_scholar }}')" style="cursor: pointer">
-            <i class="ai ai-google-scholar" aria-hidden="true"></i>
-          </span>
+          {% if scholar_url != "" %}
+            <span onclick="window.open('{{ scholar_url }}')" style="cursor: pointer">
+              <i class="ai ai-google-scholar" aria-hidden="true"></i>
+            </span>
+          {% endif %}
         </div>
       </div>
     </div>
