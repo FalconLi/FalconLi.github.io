@@ -136,22 +136,51 @@ h4 {
   width: 100%;
   max-width: 100%;
 }
-#resume .direction-l,
-#resume .direction-r {
+#resume .direction-l {
+  position: relative;
   width: calc(50% - 30px);
+  float: left;
+  text-align: right;
+}
+#resume .direction-r {
+  position: relative;
+  width: calc(50% - 30px);
+  float: right;
 }
 #resume .flag-wrapper {
-  white-space: nowrap;
+  position: relative;
+  display: inline-block;
+  
+  text-align: center;
 }
 #resume .flag {
-  display: inline-block;
+  position: relative;
+  display: inline;
+  background: rgb(248,248,248);
+  padding: 6px 10px;
+  border-radius: 5px;
+  
+  font-weight: 600;
+  text-align: left;
 }
-#resume .direction-l .time-wrapper,
+.time-wrapper {
+  display: inline;
+  
+  line-height: 1em;
+  font-size: 0.66666em;
+  color: rgb(51, 0, 111);
+  vertical-align: middle;
+}
+#resume .direction-l .time-wrapper {
+  float: left;
+  margin-right: 8px;
+}
 #resume .direction-r .time-wrapper {
-  float: none;
-  display: inline-block;
+  float: right;
   margin-left: 8px;
 }
+
+
 @media screen and (max-width: 660px) {
   #resume .direction-l,
   #resume .direction-r {
