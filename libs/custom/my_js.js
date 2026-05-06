@@ -15,7 +15,8 @@ $(document).ready(function() {
         '"': '&quot;',
         "'": '&#39;',
         "/": '&#x2F;'
-      }
+      },
+      doNotCountStorageKey = 'haiyingliDoNotCountVisit'
 
   function init() {
     $window.on('scroll', onScroll)
@@ -128,13 +129,15 @@ $(document).ready(function() {
     var canonicalCounterUrl = counter.getAttribute('data-counter-url') || 'https://haiyingli.me/';
     var isLocal = isLocalPreviewHost();
     var counterUrl = normalizeCounterUrl(canonicalCounterUrl);
+    applyVisitorCounterPreferenceFromUrl();
+    var shouldCountVisit = !isLocal && !isVisitCounterOptedOut();
 
     if (!window.fetch || !apiUrl) {
       return;
     }
 
     fetchWithTimeout(apiUrl, {
-      method: isLocal ? 'GET' : 'POST',
+      method: shouldCountVisit ? 'POST' : 'GET',
       headers: {
         'x-bsz-referer': counterUrl
       },
@@ -165,6 +168,68 @@ $(document).ready(function() {
     .catch(function() {
       counter.classList.add('visitor-counter--unavailable');
     });
+  }
+
+  function applyVisitorCounterPreferenceFromUrl() {
+    if (!window.URLSearchParams) {
+      return;
+    }
+
+    var params = new URLSearchParams(window.location.search);
+    var visitorCounterSetting = params.get('visitor_counter');
+    var doNotCountSetting = params.get('do_not_count');
+    var countMeSetting = params.get('count_me');
+    var didHandlePreference = false;
+
+    if (visitorCounterSetting === 'off' || doNotCountSetting === '1' || doNotCountSetting === 'true') {
+      setVisitCounterOptOut(true);
+      didHandlePreference = true;
+    }
+
+    if (visitorCounterSetting === 'on' || countMeSetting === '1' || countMeSetting === 'true' || doNotCountSetting === '0') {
+      setVisitCounterOptOut(false);
+      didHandlePreference = true;
+    }
+
+    if (didHandlePreference) {
+      params.delete('visitor_counter');
+      params.delete('do_not_count');
+      params.delete('count_me');
+      replaceUrlWithoutCounterPreference(params);
+    }
+  }
+
+  function replaceUrlWithoutCounterPreference(params) {
+    if (!window.history || !window.history.replaceState) {
+      return;
+    }
+
+    var query = params.toString();
+    var cleanUrl = window.location.pathname + (query ? '?' + query : '') + window.location.hash;
+    window.history.replaceState(null, '', cleanUrl);
+  }
+
+  function isVisitCounterOptedOut() {
+    try {
+      return window.localStorage && window.localStorage.getItem(doNotCountStorageKey) === 'true';
+    } catch (error) {
+      return false;
+    }
+  }
+
+  function setVisitCounterOptOut(isOptedOut) {
+    try {
+      if (!window.localStorage) {
+        return;
+      }
+
+      if (isOptedOut) {
+        window.localStorage.setItem(doNotCountStorageKey, 'true');
+      } else {
+        window.localStorage.removeItem(doNotCountStorageKey);
+      }
+    } catch (error) {
+    }
   }
 
   function isLocalPreviewHost() {
