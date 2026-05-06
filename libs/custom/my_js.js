@@ -22,23 +22,51 @@ $(document).ready(function() {
     $window.on('resize', resize)
     $popoverLink.on('click', openPopover)
     $document.on('click', closePopover)
-    $('a[href^="#"]').on('click', smoothScroll)
+    $('a[href*="#"]').on('click', smoothScroll)
     buildSnippets();
     initVisitorCounter();
   }
 
   function smoothScroll(e) {
+    var target = this.hash;
+    var $target = $(target);
+
+    if (!target || !$target.length || !isSameHomepageAnchor(this)) {
+      return;
+    }
+
     e.preventDefault();
     $(document).off("scroll");
-    var target = this.hash,
-        menu = target;
-    $target = $(target);
     $('html, body').stop().animate({
         'scrollTop': $target.offset().top-40
     }, 0, 'swing', function () {
-        window.location.hash = target;
+        if (window.history && window.history.pushState) {
+          window.history.pushState(null, '', target);
+        } else {
+          window.location.hash = target;
+        }
         $(document).on("scroll", onScroll);
     });
+  }
+
+  function isSameHomepageAnchor(link) {
+    var linkUrl;
+
+    try {
+      linkUrl = new URL(link.getAttribute('href'), window.location.href);
+    } catch (error) {
+      return false;
+    }
+
+    return linkUrl.origin === window.location.origin &&
+      isHomepagePath(linkUrl.pathname) &&
+      isHomepagePath(window.location.pathname);
+  }
+
+  function isHomepagePath(pathname) {
+    var normalizedPath = pathname.replace(/\/+$/, '');
+
+    return normalizedPath === '' || normalizedPath === '/index.html';
   }
 
   function openPopover(e) {
