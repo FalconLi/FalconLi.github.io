@@ -1,8 +1,7 @@
 :root {
-  /* Background intensity: 0% is almost white; 5%–12% is the recommended range. */
-  --background-depth: 10%;
-  --background-variation: 15%;
-  --paper: hsl(135, var(--background-variation), calc(98% - var(--background-depth)));
+  /* Increase or decrease this percentage to strengthen or soften the blue blooms. */
+  --background-blue-strength: 24%;
+  --paper: #f3f6f7;
   --surface: #ffffff;
   --ink: #27323a;
   --muted: #66727a;
@@ -19,20 +18,31 @@
 
 html {
   scroll-behavior: smooth;
-  background: var(--paper);
+  background: #f7f6f2;
 }
 
 body {
   min-height: 100vh;
-  background-color: var(--paper);
+  background-color: #f7f6f2;
   background-image:
-    radial-gradient(circle at 86% 8%, rgba(105, 153, 165, 0.14) 0, rgba(105, 153, 165, 0) 30rem),
-    linear-gradient(
-      135deg,
-      hsl(42, var(--background-variation), calc(98% - var(--background-depth))) 0%,
-      hsl(135, var(--background-variation), calc(98% - var(--background-depth))) 52%,
-      hsl(195, var(--background-variation), calc(98% - var(--background-depth))) 100%
-    );
+    radial-gradient(
+      ellipse 54rem 46rem at 12% 58%,
+      rgb(83 145 179 / var(--background-blue-strength)) 0%,
+      rgb(83 145 179 / 10%) 38%,
+      transparent 74%
+    ),
+    radial-gradient(
+      ellipse 58rem 48rem at 88% 64%,
+      rgb(98 126 179 / var(--background-blue-strength)) 0%,
+      rgb(98 126 179 / 9%) 40%,
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 45rem 30rem at 52% 5%,
+      rgb(125 176 197 / 14%) 0%,
+      transparent 72%
+    ),
+    linear-gradient(180deg, #faf9f5 0%, #f5f7f7 55%, #f7f8f6 100%);
   background-attachment: fixed;
   background-repeat: no-repeat;
   color: var(--ink);
@@ -857,7 +867,7 @@ ul.tab-nav li .active.button {
     border-right: 0;
     border-left: 0;
     border-radius: 0;
-    background: rgba(231, 237, 232, 0.92);
+    background: rgba(238, 243, 246, 0.92);
     box-shadow: 0 4px 18px rgba(38, 49, 55, 0.07);
   }
 
