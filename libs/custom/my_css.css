@@ -705,14 +705,14 @@ ul.tab-nav li .active.button {
 }
 
 #resume .desc {
-  margin: 0.8rem 0.75rem 0 0;
+  margin: 0.2rem 0.75rem 0 0;
   color: var(--muted);
   font-size: 1.38rem;
   line-height: 1.5;
 }
 
 #resume .direction-r .desc {
-  margin: 0.8rem 0 0 0.75rem;
+  margin: 0.2rem 0 0 0.75rem;
 }
 
 /* ======================== Projects ======================== */
@@ -895,7 +895,7 @@ ul.tab-nav li .active.button {
   #resume .direction-r .desc {
     position: relative;
     z-index: 15;
-    margin: 0.8rem 0 0;
+    margin: 0.25rem 0 0;
     padding: 0;
     background: transparent;
     box-shadow: none;
