@@ -1,5 +1,12 @@
 experiences:
 
+- place: "Shanghai HKU Education Centre"
+  location: "Shanghai, China"
+  time: "Jul 2026 - Aug 2026"
+  title: "Research Internship"
+  subtitle: "HKU School of Computing and Data Science"
+  category: "work"
+
 - place: "University of British Columbia (UBC)"
   location: "Vancouver, Canada"
   time: "May 2025 - Aug 2025"
