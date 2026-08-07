@@ -46,21 +46,35 @@ title: Home
 
 <!-- ========== NEWS ========== -->
 <div class="docs-section" id="news">
-  <h4>News</h4>
+  <div class="showcase-heading showcase-heading--news">
+    <span class="showcase-heading__icon" aria-hidden="true">
+      <i class="fa-regular fa-paper-plane"></i>
+    </span>
+    <div class="showcase-heading__copy">
+      <span class="showcase-heading__eyebrow">From the desk</span>
+      <h4>News</h4>
+    </div>
+    {% if site.data.news.news and site.data.news.news.size > 0 %}
+      <span class="showcase-heading__count">{{ site.data.news.news.size }} updates</span>
+    {% endif %}
+  </div>
 
   {% if site.data.news.news and site.data.news.news.size > 0 %}
-    <div class="news-scroll-window">
-      <table class="news-table">
-        <tbody>
-          {% for item in site.data.news.news %}
-            <tr>
-              <td class="news-date">{{ item.date }}</td>
-              <td class="news-gap" aria-hidden="true"></td>
-              <td class="news-content">{{ item.content }}</td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+    <div class="news-journal">
+      {% for item in site.data.news.news %}
+        <article class="news-entry{% if forloop.first %} news-entry--latest{% endif %}">
+          <time class="news-entry__date" datetime="{{ item.date | date: '%Y-%m-%d' }}">
+            <span class="news-entry__day">{{ item.date | date: "%d" }}</span>
+            <span class="news-entry__month">{{ item.date | date: "%b" }}</span>
+            <span class="news-entry__year">{{ item.date | date: "%Y" }}</span>
+          </time>
+          <span class="news-entry__marker" aria-hidden="true"></span>
+          <div class="news-entry__body">
+            {% if forloop.first %}<span class="news-entry__label">Latest</span>{% endif %}
+            <p>{{ item.content }}</p>
+          </div>
+        </article>
+      {% endfor %}
     </div>
   {% else %}
     <p><i>No news yet.</i></p>
@@ -257,17 +271,33 @@ title: Home
 
 <!-- ========== AWARDS ========== -->
 <div class="docs-section" id="awards">
-  <h4>Honours & Awards</h4>
+  <div class="showcase-heading showcase-heading--awards">
+    <span class="showcase-heading__icon" aria-hidden="true">
+      <i class="fa-solid fa-award"></i>
+    </span>
+    <div class="showcase-heading__copy">
+      <span class="showcase-heading__eyebrow">Milestones</span>
+      <h4>Honours &amp; Awards</h4>
+    </div>
+    {% if site.data.awards.awards and site.data.awards.awards.size > 0 %}
+      <span class="showcase-heading__count">{{ site.data.awards.awards.size }} distinctions</span>
+    {% endif %}
+  </div>
 
   {% if site.data.awards.awards and site.data.awards.awards.size > 0 %}
-    <div class="awards-scroll-window" style="max-height: 25rem; overflow-y: auto; overflow-x: hidden;">
+    <div class="awards-gallery">
       {% for award in site.data.awards.awards %}
         {% assign award_org = award.awarder | default: award.awardee %}
-        {% if award_org %}
-          <p class="award-item">- <b>{{ award.title }}</b>: {{ award_org }}, <i>{{ award.time }}</i></p>
-        {% else %}
-          <p class="award-item">- <b>{{ award.title }}</b>: <i>{{ award.time }}</i></p>
-        {% endif %}
+        <article class="award-card">
+          <div class="award-card__seal" aria-hidden="true">
+            <i class="fa-solid fa-star"></i>
+          </div>
+          <div class="award-card__copy">
+            <span class="award-card__time">{{ award.time }}</span>
+            <h5>{{ award.title }}</h5>
+            {% if award_org %}<p>{{ award_org }}</p>{% endif %}
+          </div>
+        </article>
       {% endfor %}
     </div>
   {% else %}
@@ -275,53 +305,36 @@ title: Home
   {% endif %}
 </div>
 
-<!-- ========== TEACHING ==========
-<div class="docs-section" id="teaching">
-  <h4>Teaching</h4>
-
-  {% if site.data.teaching.teaching and site.data.teaching.teaching.size > 0 %}
-    <div class="teaching-scroll-window" style="max-height: 30rem; overflow-y: auto; overflow-x: hidden;">
-      {% for teaching in site.data.teaching.teaching %}
-        {% assign teaching_org = teaching.institution | default: teaching.instructor %}
-        {% if teaching_org %}
-          <p class="teaching-item">- <b>{{ teaching.title }}</b>: {{ teaching_org }}, <i>{{ teaching.time }}</i></p>
-        {% else %}
-          <p class="teaching-item">- <b>{{ teaching.title }}</b>: <i>{{ teaching.time }}</i></p>
-        {% endif %}
-      {% endfor %}
-    </div>
-  {% else %}
-    <p><i>No teaching experience listed yet.</i></p>
-  {% endif %}
-</div> -->
-
 <!-- ========== TEACHING ========== -->
 <div class="docs-section" id="teaching">
-  <h4>Teaching</h4>
+  <div class="showcase-heading showcase-heading--teaching">
+    <span class="showcase-heading__icon" aria-hidden="true">
+      <i class="fa-solid fa-chalkboard-user"></i>
+    </span>
+    <div class="showcase-heading__copy">
+      <span class="showcase-heading__eyebrow">In the classroom</span>
+      <h4>Teaching</h4>
+    </div>
+    {% if site.data.teaching.teaching and site.data.teaching.teaching.size > 0 %}
+      <span class="showcase-heading__count">{{ site.data.teaching.teaching.size }} courses</span>
+    {% endif %}
+  </div>
 
   {% if site.data.teaching.teaching and site.data.teaching.teaching.size > 0 %}
-    <div class="teaching-scroll-window" style="max-height: 30rem; overflow-y: auto; overflow-x: hidden;">
+    <div class="teaching-grid">
       {% for teaching in site.data.teaching.teaching %}
         {% assign teaching_org = teaching.institution | default: teaching.instructor %}
-        {% if teaching_org %}
-          <p class="teaching-item">
-            <span>-</span>
-            <span>
-              <span><b>{{ teaching.title }}</b>: {{ teaching_org }}, <i>{{ teaching.time }}</i></span>
-              <br/>
-              <span style="margin-left: 10px;">{{ teaching.course }}: {{ teaching.description }}</span>
-            </span>
+        <article class="teaching-card">
+          <div class="teaching-card__topline">
+            <span class="teaching-card__course">{{ teaching.course }}</span>
+            <span class="teaching-card__time">{{ teaching.time }}</span>
+          </div>
+          <h5>{{ teaching.description }}</h5>
+          <p class="teaching-card__role">
+            <i class="fa-regular fa-compass" aria-hidden="true"></i>
+            <span>{{ teaching.title }}{% if teaching_org %} · {{ teaching_org }}{% endif %}</span>
           </p>
-        {% else %}
-          <p class="teaching-item">
-            <span>-</span>
-            <span>
-              <span><b>{{ teaching.title }}</b>: <i>{{ teaching.time }}</i></span>
-              <br/>
-              <span style="margin-left: 10px;">{{ teaching.course }}: {{ teaching.description }}</span>
-            </span>
-          </p>
-        {% endif %}
+        </article>
       {% endfor %}
     </div>
   {% else %}
