@@ -1,17 +1,24 @@
 experiences:
 
+- place: "The University of Hong Kong (HKU)"
+  location: "Hong Kong, Hong Kong SAR"
+  time: "Sept 2026 - Aug 2030"
+  title: "Doctor of Philosophy (PhD)"
+  subtitle: "School of Computing and Data Science <br/><a href='https://sec.hku.hk/' target='_blank'>JC STEM Lab of Intelligent Cybersecurity</a> (Prof. <a href='https://www.cs.hku.hk/index.php/people/academic-staff/chenho' target='_blank'>Ho Chen</a>)"
+  category: "work"
+
 - place: "Shanghai HKU Education Centre"
   location: "Shanghai, China"
   time: "Jul 2026 - Aug 2026"
   title: "Research Internship"
-  subtitle: "HKU-CDS Shanghai"
+  subtitle: "<a href='https://sh.cds.hku.hk' target='_blank'>HKU-CDS Shanghai</a>"
   category: "work"
 
 - place: "University of British Columbia (UBC)"
   location: "Vancouver, Canada"
   time: "May 2025 - Aug 2025"
   title: "Mitacs Globalink Research Internship"
-  subtitle: "Department of Computer Science <br/> Systopia Lab"
+  subtitle: "Department of Computer Science <br/><a href='https://systopia.cs.ubc.ca' target='_blank'>Systopia Lab</a> (Prof. <a href='https://aasthakm.github.io' target='_blank'>Aastha Mehta</a>)"
   category: "work"
 
 - place: "Peking University (PKU)"
@@ -32,5 +39,5 @@ experiences:
   location: "Hong Kong, Hong Kong SAR"
   time: "Sept 2022 - Jun 2026"
   title: "Bachelor of Engineering (BEng) in Computer Engineering"
-  subtitle: "Department of Electrical and Computer Engineering (ECE) <br/> First Class Honours (3.99/4.30) <br/>"
+  subtitle: "Department of Electrical and Computer Engineering (<a href='https://ece.hku.hk/' target='_blank'>ECE</a>) <br/> First Class Honours (3.99/4.30) <br/>"
   category: "school"
