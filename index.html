@@ -4,18 +4,39 @@ title: Home
 ---
 <!-- ========== BIO ========== -->
 <div class="docs-section" id="bio">
-  <h4>Bio</h4>
-  <p>
-  I am a PhD student at the School of Computing and Data Science (<a href="https://www.cs.hku.hk/" target="_blank">CDS</a>) of the University of Hong Kong (HKU). 
-  I work with the <a href="https://sec.hku.hk/" target="_blank">JC STEM Lab of Intelligent Cybersecurity</a>, supervised by Prof. <a href="https://www.cs.hku.hk/index.php/people/academic-staff/chenho" target="_blank">Ho Chen</a>.
-  Before that, I completed my Bachelor of Engineering in Computer Engineering at HKU as well.
-  </p>
+  <div class="showcase-heading showcase-heading--bio">
+    <span class="showcase-heading__icon" aria-hidden="true">
+      <i class="fa-regular fa-user"></i>
+    </span>
+    <h4>Bio</h4>
+  </div>
 
-  <p>
-  My research interests lie in <b>Computer Security</b>, with a particular focus on AI-driven security.
-  I am working on automated program analysis and vulnerability detection, applying AI-driven fuzzing to enhance 
-  software security testing. I am also interested in the field of <b>Trustworthy AI</b> and I am currently exploring topics in that area.
-  </p> 
+  <div class="bio-profile">
+    <div class="bio-profile__intro">
+      <span class="bio-profile__mark" aria-hidden="true"><i class="fa-solid fa-quote-left"></i></span>
+      <p>
+        I am a PhD student at the School of Computing and Data Science (<a href="https://www.cs.hku.hk/" target="_blank">CDS</a>) of the University of Hong Kong (HKU).
+        I work with the <a href="https://sec.hku.hk/" target="_blank">JC STEM Lab of Intelligent Cybersecurity</a>, supervised by Prof. <a href="https://www.cs.hku.hk/index.php/people/academic-staff/chenho" target="_blank">Ho Chen</a>.
+        Before that, I completed my Bachelor of Engineering in Computer Engineering at HKU as well.
+      </p>
+    </div>
+
+    <div class="bio-profile__research">
+      <div class="bio-profile__research-copy">
+        <span class="bio-profile__research-icon" aria-hidden="true"><i class="fa-solid fa-microscope"></i></span>
+        <p>
+          My research interests lie in <b>Computer Security</b>, with a particular focus on AI-driven security.
+          I am working on automated program analysis and vulnerability detection, applying AI-driven fuzzing to enhance
+          software security testing. I am also interested in the field of <b>Trustworthy AI</b> and I am currently exploring topics in that area.
+        </p>
+      </div>
+      <div class="bio-profile__topics" aria-label="Research interests">
+        <span>Program analysis</span>
+        <span>AI-driven fuzzing</span>
+        <span>Trustworthy AI</span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--
@@ -50,13 +71,7 @@ title: Home
     <span class="showcase-heading__icon" aria-hidden="true">
       <i class="fa-regular fa-paper-plane"></i>
     </span>
-    <div class="showcase-heading__copy">
-      <span class="showcase-heading__eyebrow">From the desk</span>
-      <h4>News</h4>
-    </div>
-    {% if site.data.news.news and site.data.news.news.size > 0 %}
-      <span class="showcase-heading__count">{{ site.data.news.news.size }} updates</span>
-    {% endif %}
+    <h4>News</h4>
   </div>
 
   {% if site.data.news.news and site.data.news.news.size > 0 %}
@@ -83,15 +98,20 @@ title: Home
 
 <!-- ========== PUBLICATIONS ========== -->
 <div class="docs-section" id="publications">
-  <h4>Publications</h4>
-
-  <!-- <p>Most recent publications on <a href="{{ site.data.main_info.google_scholar }}" target="_blank">Google Scholar</a>.<br/> -->
-  <p>
-    <sup>‡</sup> indicates equal contribution.
-  </p>
+  <div class="showcase-heading showcase-heading--publications">
+    <span class="showcase-heading__icon" aria-hidden="true">
+      <i class="fa-solid fa-book-open"></i>
+    </span>
+    <h4>Publications</h4>
+  </div>
 
   {% assign papers = site.data.publications.papers %}
   {% if papers and papers.size > 0 %}
+  <p class="publication-note">
+    <span aria-hidden="true">‡</span>
+    indicates equal contribution.
+  </p>
+
   <ul class="tab-nav">
     <li><div class="button active" data-ref="#papers-selected">Selected & Recent</div></li>
     <li><div class="button" data-ref="#papers-all">All</div></li>
@@ -190,7 +210,13 @@ title: Home
     </div>
   </div>
   {% else %}
-  <p><i>No publications yet. My h-index is currently powered by coffee and good intentions.</i></p>
+  <div class="publications-empty">
+    <span class="publications-empty__icon" aria-hidden="true"><i class="fa-solid fa-pen-nib"></i></span>
+    <div>
+      <h5>Research in progress</h5>
+      <p>No publications yet. My h-index is currently powered by coffee and good intentions.</p>
+    </div>
+  </div>
   {% endif %}
 </div>
 
@@ -275,13 +301,7 @@ title: Home
     <span class="showcase-heading__icon" aria-hidden="true">
       <i class="fa-solid fa-award"></i>
     </span>
-    <div class="showcase-heading__copy">
-      <span class="showcase-heading__eyebrow">Milestones</span>
-      <h4>Honours &amp; Awards</h4>
-    </div>
-    {% if site.data.awards.awards and site.data.awards.awards.size > 0 %}
-      <span class="showcase-heading__count">{{ site.data.awards.awards.size }} distinctions</span>
-    {% endif %}
+    <h4>Honours &amp; Awards</h4>
   </div>
 
   {% if site.data.awards.awards and site.data.awards.awards.size > 0 %}
@@ -311,13 +331,7 @@ title: Home
     <span class="showcase-heading__icon" aria-hidden="true">
       <i class="fa-solid fa-chalkboard-user"></i>
     </span>
-    <div class="showcase-heading__copy">
-      <span class="showcase-heading__eyebrow">In the classroom</span>
-      <h4>Teaching</h4>
-    </div>
-    {% if site.data.teaching.teaching and site.data.teaching.teaching.size > 0 %}
-      <span class="showcase-heading__count">{{ site.data.teaching.teaching.size }} courses</span>
-    {% endif %}
+    <h4>Teaching</h4>
   </div>
 
   {% if site.data.teaching.teaching and site.data.teaching.teaching.size > 0 %}
@@ -344,41 +358,59 @@ title: Home
 
 <!-- ========== RESUME ========== -->
 <div class="docs-section" id="resume">
-  <h4>Vitæ</h4>
+  <div class="showcase-heading showcase-heading--vitae">
+    <span class="showcase-heading__icon" aria-hidden="true">
+      <i class="fa-solid fa-route"></i>
+    </span>
+    <h4>Vitæ</h4>
+  </div>
 
   <!-- The Timeline -->
-  <ul class="timeline">
-    {% for exp in site.data.experience.experiences %}
-    <li>
-      {% if exp.category == "work" %}
-      <div class="direction-l">
-      {% else %}
-      <div class="direction-r">
-      {% endif %}
-        <div class="flag-wrapper">
-          <span class="flag">{{ exp.place }}</span>
-          <span class="time-wrapper"><span class="time">{{ exp.time }}</span></span>
+  <div class="vitae-path">
+    <div class="vitae-path__legend" aria-hidden="true">
+      <span><i class="fa-solid fa-flask"></i> Research</span>
+      <span><i class="fa-solid fa-graduation-cap"></i> Education</span>
+    </div>
+    <ul class="timeline">
+      {% for exp in site.data.experience.experiences %}
+      <li>
+        {% if exp.category == "work" %}
+        <div class="direction-l timeline-entry timeline-entry--work">
+        {% else %}
+        <div class="direction-r timeline-entry timeline-entry--school">
+        {% endif %}
+          <div class="flag-wrapper">
+            <span class="flag">{{ exp.place }}</span>
+            <span class="time-wrapper"><span class="time">{{ exp.time }}</span></span>
+          </div>
+          <div class="desc">
+            <span class="vitae-entry__location"><i class="fa-solid fa-location-dot" aria-hidden="true"></i>{{ exp.location }}</span>
+            <strong class="vitae-entry__title">{{ exp.title }}</strong>
+            <span class="vitae-entry__detail">{{ exp.subtitle }}</span>
+          </div>
         </div>
-        <div class="desc"><i>{{ exp.location }}</i> <br/> <b>{{ exp.title }}</b> <br/> {{ exp.subtitle }}</div>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
 </div>
 
 <!-- ========== SITE PULSE ========== -->
 <div class="docs-section" id="site-pulse">
-  <h4>Site Pulse</h4>
+  <div class="showcase-heading showcase-heading--pulse">
+    <span class="showcase-heading__icon" aria-hidden="true">
+      <i class="fa-solid fa-wave-square"></i>
+    </span>
+    <h4>Site Pulse</h4>
+  </div>
 
   <div class="visitor-counter" data-visit-counter data-counter-api="https://bsz.saop.cc/api" data-counter-url="https://haiyingli.me/">
     <div class="visitor-counter__intro">
-      <div>
-        <div class="visitor-counter__kicker">
-          <i class="fa-solid fa-signal" aria-hidden="true"></i>
-          Live visit counter
-        </div>
-        <p class="visitor-counter__line">A small heartbeat from the people who have found this page.</p>
+      <div class="visitor-counter__status">
+        <span class="visitor-counter__live-dot" aria-hidden="true"></span>
+        Live visit counter
       </div>
+      <p class="visitor-counter__line">A small heartbeat from the people who have found this page.</p>
     </div>
 
     <div class="visitor-counter__grid" aria-live="polite">
@@ -409,6 +441,14 @@ title: Home
 </div>
 
 <div class="docs-section" id="template">
-  <h4>Acknowledgements</h4>
-  This website used a template provided by <a href="https://github.com/msaveski/www_personal" target="_blank">Martin Saveski</a>.
+  <div class="showcase-heading showcase-heading--acknowledgements">
+    <span class="showcase-heading__icon" aria-hidden="true">
+      <i class="fa-solid fa-code-branch"></i>
+    </span>
+    <h4>Acknowledgements</h4>
+  </div>
+
+  <div class="acknowledgement-note">
+    <p>This website uses a template provided by <a href="https://github.com/msaveski/www_personal" target="_blank">Martin Saveski</a>.</p>
+  </div>
 </div>  

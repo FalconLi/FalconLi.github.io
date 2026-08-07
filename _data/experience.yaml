@@ -1,6 +1,6 @@
 experiences:
 
-- place: "The University of Hong Kong (HKU)"
+- place: "The University of Hong Kong"
   location: "Hong Kong, Hong Kong SAR"
   time: "Sept 2026 - Aug 2030"
   title: "Doctor of Philosophy (PhD)"
@@ -14,28 +14,28 @@ experiences:
   subtitle: "<a href='https://sh.cds.hku.hk' target='_blank'>HKU-CDS Shanghai</a>"
   category: "work"
 
-- place: "University of British Columbia (UBC)"
+- place: "University of British Columbia"
   location: "Vancouver, Canada"
   time: "May 2025 - Aug 2025"
   title: "Mitacs Globalink Research Internship"
   subtitle: "Department of Computer Science <br/><a href='https://systopia.cs.ubc.ca' target='_blank'>Systopia Lab</a> (Prof. <a href='https://aasthakm.github.io' target='_blank'>Aastha Mehta</a>)"
   category: "work"
 
-- place: "Peking University (PKU)"
+- place: "Peking University"
   location: "Beijing, China"
   time: "Jul 2023"
   title: "Summer School"
   subtitle: "College of Engineering"
   category: "school"
 
-- place: "Fudan University (FDU)"
+- place: "Fudan University"
   location: "Remote" 
   time: "Dec 2022 - Jan 2023"
   title: "Winter School"
   subtitle: "School of Economics"
   category: "school"
 
-- place: "The University of Hong Kong (HKU)"
+- place: "The University of Hong Kong"
   location: "Hong Kong, Hong Kong SAR"
   time: "Sept 2022 - Jun 2026"
   title: "Bachelor of Engineering (BEng) in Computer Engineering"
